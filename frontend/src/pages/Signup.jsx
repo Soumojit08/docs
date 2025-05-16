@@ -1,5 +1,5 @@
 import { Eye, EyeClosed, FileArchiveIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import AuthImagePattern from "../components/AuthImagePattern";
 import { useState } from "react";
@@ -11,10 +11,11 @@ const SignUpPage = () => {
     userName: "",
     email: "",
     password: "",
-    profileimage: null,
+    profilePic: null,
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -52,8 +53,8 @@ const SignUpPage = () => {
       form.append("userName", formData.userName);
       form.append("password", formData.password);
 
-      if (formData.profileimage) {
-        form.append("profileimage", formData.profileimage);
+      if (formData.profilePic) {
+        form.append("profilePic", formData.profilePic);
       }
 
       const response = await axiosInstance.post("/auth/signup", form, {
@@ -67,6 +68,7 @@ const SignUpPage = () => {
       console.error("Signup error:", error);
     } finally {
       setIsLoading(false);
+      navigate("/");
     }
   };
 
@@ -176,7 +178,7 @@ const SignUpPage = () => {
               <div className="relative">
                 <input
                   type="file"
-                  name="profileimage"
+                  name="profilePic"
                   className="file-input w-full"
                   onChange={handleChange}
                 />
