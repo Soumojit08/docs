@@ -5,7 +5,10 @@ import AuthImagePattern from "../components/AuthImagePattern";
 import { useState } from "react";
 import axiosInstance from "../lib/axios";
 
+import useAuthStore from "../store/useAuthStore";
+
 const SignUpPage = () => {
+  const { signup } = useAuthStore();
   const [formData, setFormData] = useState({
     fullName: "",
     userName: "",

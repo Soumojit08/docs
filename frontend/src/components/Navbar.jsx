@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { LogOut, FileArchive } from "lucide-react";
+import { LogOut, FileArchive, LogIn } from "lucide-react";
+import useAuthStore from "../store/useAuthStore";
 
 const Navbar = () => {
+  const { isAuthenticated, logout } = useAuthStore();
   return (
     <header
       className="bg-base-100/80 border-b border-base-300 fixed w-full top-0 z-40 
@@ -22,10 +24,20 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center">
-            <button className="flex items-center btn btn-error btn-soft shadow-none">
-              <LogOut className="size-5" />
-              <span className="hidden sm:inline">Logout</span>
-            </button>
+            {isAuthenticated ? (
+              <button
+                onClick={logout}
+                className="flex items-center btn btn-error btn-soft shadow-none"
+              >
+                <LogOut className="size-5" />
+                <span className="hidden sm:inline">Logout</span>
+              </button>
+            ) : (
+              <button className="flex items-center btn btn-primary opacity-90 shadow-none hover:opacity-85">
+                <LogIn className="size-5" />
+                <span className="hidden sm:inline">Login</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
