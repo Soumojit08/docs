@@ -3,7 +3,7 @@ import Models from "../../models/index.model.js";
 import bcryptjs from "bcryptjs";
 import cloudinary from "../../utils/cloudinary.js";
 import fs from "fs";
-import upload from "../../utils/multer.js";
+
 
 const signupController = async (req, res) => {
   try {
