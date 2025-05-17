@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import authRoute from "./routes/auth.route.js";
 import connectToDB from "./utils/Db.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 //variables
 dotenv.config();
@@ -12,6 +13,7 @@ const PORT = process.env.PORT;
 connectToDB();
 
 //middlewares
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
