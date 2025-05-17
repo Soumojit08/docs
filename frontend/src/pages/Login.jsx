@@ -1,9 +1,46 @@
-import { Eye, FileArchiveIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import React, { use, useState } from "react";
+import { Eye, FileArchiveIcon, EyeClosed } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 import AuthImagePattern from "../components/AuthImagePattern";
+import useAuthStore from "../store/useAuthStore";
 
 const Login = () => {
+  const { login } = useAuthStore();
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    userName: "",
+    password: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handlePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      await login(formData);
+    } catch (error) {
+      console.error("Login error:", error);
+    } finally {
+      setIsLoading(false);
+      navigate("/home");
+    }
+  };
+
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* left side */}
@@ -39,6 +76,8 @@ const Login = () => {
                   type="text"
                   className={`input input-bordered w-full`}
                   placeholder="Johndoe_01"
+                  name="userName"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -49,20 +88,31 @@ const Login = () => {
               </label>
               <div className="relative">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   className={`input input-bordered w-full`}
                   placeholder="••••••••"
+                  name="password"
+                  onChange={handleChange}
                 />
                 <button
                   type="button"
                   className="absolute inset-y-0 cursor-pointer right-3 text-gray-300"
+                  onClick={handlePassword}
                 >
-                  <Eye className="size-5 " />
+                  {showPassword ? (
+                    <Eye className="size-5 " />
+                  ) : (
+                    <EyeClosed className="size-5 " />
+                  )}
                 </button>
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full">
+            <button
+              type="submit"
+              className="btn btn-primary w-full"
+              onClick={handleLogin}
+            >
               Login
             </button>
           </form>

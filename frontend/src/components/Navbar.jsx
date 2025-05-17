@@ -24,18 +24,13 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center">
-            {isAuthenticated ? (
+            {isAuthenticated && (
               <button
                 onClick={logout}
                 className="flex items-center btn btn-error btn-soft shadow-none"
               >
                 <LogOut className="size-5" />
                 <span className="hidden sm:inline">Logout</span>
-              </button>
-            ) : (
-              <button className="flex items-center btn btn-primary opacity-90 shadow-none hover:opacity-85">
-                <LogIn className="size-5" />
-                <span className="hidden sm:inline">Login</span>
               </button>
             )}
           </div>

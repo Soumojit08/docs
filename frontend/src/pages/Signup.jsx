@@ -3,12 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 import AuthImagePattern from "../components/AuthImagePattern";
 import { useState } from "react";
-import axiosInstance from "../lib/axios";
 
 import useAuthStore from "../store/useAuthStore";
 
 const SignUpPage = () => {
-  const { signup } = useAuthStore();
+  const { signup, loading, error } = useAuthStore();
   const [formData, setFormData] = useState({
     fullName: "",
     userName: "",
@@ -43,7 +42,6 @@ const SignUpPage = () => {
       !formData.userName ||
       !formData.password
     ) {
-      alert("Please fill in all required fields.");
       setIsLoading(false);
       return;
     }
@@ -60,18 +58,14 @@ const SignUpPage = () => {
         form.append("profilePic", formData.profilePic);
       }
 
-      const response = await axiosInstance.post("/auth/signup", form, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await signup(form);
 
-      console.log("Signup successful:", response.data);
+      console.log("Signup successful");
     } catch (error) {
       console.error("Signup error:", error);
     } finally {
       setIsLoading(false);
-      navigate("/");
+      navigate("/home");
     }
   };
 
