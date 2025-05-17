@@ -5,15 +5,15 @@ import jwt from "jsonwebtoken";
 
 const loginController = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { userName, password } = req.body;
 
-    if (!username || !password) {
+    if (!userName || !password) {
       return res.status(StatusCodes.BAD_REQUEST).json({
         message: "Username and password are required",
       });
     }
 
-    const user = await Models.UserModel.findOne({ username });
+    const user = await Models.UserModel.findOne({ userName });
 
     if (!user) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -34,7 +34,7 @@ const loginController = async (req, res) => {
     const token = jwt.sign(
       {
         id: user._id,
-        username: user.userName,
+        userName: user.userName,
       },
       process.env.JWT_SECRET,
       {
@@ -51,7 +51,7 @@ const loginController = async (req, res) => {
       message: "Login successful",
       user: {
         id: user._id,
-        username: user.userName,
+        userName: user.userName,
         email: user.email,
         profilePic: user.profilePic,
       },
