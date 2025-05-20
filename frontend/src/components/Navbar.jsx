@@ -1,41 +1,65 @@
 import { Link } from "react-router-dom";
-import { LogOut, FileArchive, LogIn } from "lucide-react";
+import { LogOut, FileArchive } from "lucide-react";
 import useAuthStore from "../store/useAuthStore";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuthStore();
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(window.scrollY);
+
+  // Hide on scroll down, show on scroll up
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 30) {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line
+  }, [lastScrollY]);
+
   return (
     <header
-      className="bg-base-100/80 border-b border-base-300 fixed w-full top-0 z-40 
-    backdrop-blur-lg "
+      className={`
+        fixed top-0 left-0 w-full z-50
+        transition-all duration-300
+        bg-base-100 border-b border-base-300
+        shadow-md
+        ${
+          show
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-10 pointer-events-none"
+        }
+      `}
     >
-      <div className="container mx-auto px-4 h-16">
-        <div className="flex items-center justify-between h-full">
-          <div className="flex items-center gap-8">
-            <Link
-              to="/"
-              className="flex items-center gap-2.5 hover:opacity-80 transition-all"
+      <nav className="container mx-auto flex items-center justify-between px-4 h-16 transition-all duration-300">
+        <Link
+          to="/"
+          className="flex items-center gap-2.5 hover:opacity-80 transition-all"
+        >
+          <div className="size-8 rounded-lg bg-primary/10 flex items-center justify-center">
+            <FileArchive className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-lg font-bold uppercase tracking-tight">Docs</h1>
+        </Link>
+        <div className="flex items-center">
+          {isAuthenticated && (
+            <button
+              onClick={logout}
+              className="btn border-none  flex items-center gap-2 px-3 py-1 rounded-xl bg-error/10 text-error hover:bg-error/20 transition"
             >
-              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <FileArchive className="w-5 h-5 text-primary" />
-              </div>
-              <h1 className="text-lg font-bold">Docs</h1>
-            </Link>
-          </div>
-
-          <div className="flex items-center">
-            {isAuthenticated && (
-              <button
-                onClick={logout}
-                className="flex items-center btn btn-error btn-soft shadow-none"
-              >
-                <LogOut className="size-5" />
-                <span className="hidden sm:inline">Logout</span>
-              </button>
-            )}
-          </div>
+              <LogOut className="size-5" />
+              <span className="hidden sm:inline">Logout</span>
+            </button>
+          )}
         </div>
-      </div>
+      </nav>
     </header>
   );
 };
