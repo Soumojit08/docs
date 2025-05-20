@@ -4,10 +4,18 @@ import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
+import { useEffect } from "react";
+import useAuthStore from "./store/useAuthStore";
 
 const App = () => {
+  const fetchMe = useAuthStore((state) => state.getMe);
+
+  useEffect(() => {
+    fetchMe();
+  }, [fetchMe]);
+
   return (
-    <div className="h-screen">
+    <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />

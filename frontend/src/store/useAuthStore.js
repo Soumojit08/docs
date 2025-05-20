@@ -61,6 +61,24 @@ const useAuthStore = create((set) => ({
       set({ error: error.message });
     }
   },
+
+  getMe: async () => {
+    set({ loading: true });
+    try {
+      const res = await axiosInstance.get("/user/me");
+      set({
+        user: res.data.user,
+        isAuthenticated: true,
+        loading: false,
+      });
+    } catch (error) {
+      set({
+        error: error.message,
+        loading: false,
+        isAuthenticated: false,
+      });
+    }
+  },
 }));
 
 export default useAuthStore;
