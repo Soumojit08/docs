@@ -9,19 +9,20 @@ import useAuthStore from "./store/useAuthStore";
 
 const App = () => {
   const fetchMe = useAuthStore((state) => state.getMe);
+  const { isAuthenticated } = useAuthStore();
 
   useEffect(() => {
     fetchMe();
   }, [fetchMe]);
 
   return (
-    <div>
+    <div className="bg-zinc-900">
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={isAuthenticated ? <Home /> : <Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={isAuthenticated ? <Home /> : <Login />} />
       </Routes>
     </div>
   );
