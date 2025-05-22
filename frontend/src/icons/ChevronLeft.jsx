@@ -16,10 +16,10 @@ const chevronVariants = {
 };
 
 const ChevronRight = ({
-  width = 20,
-  height = 20,
+  width = 24,
+  height = 24,
   strokeWidth = 2,
-  stroke = "#111",
+  stroke = "#1d1d1d",
   ...props
 }) => {
   const controls = useAnimation();
