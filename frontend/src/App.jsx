@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Navbar from "./components/Navbar";
+import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
 import { useEffect } from "react";
@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <div className="bg-zinc-900">
-      <Navbar />
+      <Nav />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={isAuthenticated ? <Home /> : <Login />} />

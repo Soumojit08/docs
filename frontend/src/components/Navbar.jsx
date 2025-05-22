@@ -58,13 +58,16 @@ const Navbar = () => {
         </Link>
         <div className="flex items-center">
           {isAuthenticated ? (
-            <button
-              onClick={handleLogout}
-              className="btn border-none  flex items-center gap-2 px-3 py-1 rounded-md bg-error/10 text-error hover:bg-error/20 transition"
-            >
-              <LogOut className="size-5" />
-              <span className="hidden sm:inline">Logout</span>
-            </button>
+            // <button
+            //   onClick={handleLogout}
+            //   className="btn border-none  flex items-center gap-2 px-3 py-1 rounded-md bg-error/10 text-error hover:bg-error/20 transition"
+            // >
+            //   <LogOut className="size-5" />
+            //   <span className="hidden sm:inline">Logout</span>
+            // </button>
+            <div className="">
+
+            </div>
           ) : (
             <Link
               to="/login"

@@ -51,7 +51,7 @@ const Login = () => {
       />
 
       {/* right side */}
-      <div className="flex flex-col justify-center items-center p-6 mt-6 sm:p-12">
+      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-6">
           {/* LOGO */}
           <div className="text-center mb-4">
@@ -120,7 +120,7 @@ const Login = () => {
           <div className="text-center">
             <p className="text-base-content/60">
               Don't have an account?{" "}
-              <Link to="/login" className="link link-primary">
+              <Link to="/signup" className="link link-primary">
                 Sign up
               </Link>
             </p>
