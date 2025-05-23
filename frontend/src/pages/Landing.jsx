@@ -3,7 +3,6 @@ import ShinyText from "../components/ShinyText";
 import GetStarted from "../components/Buttons/GetStarted";
 import SpotlightCard from "../components/SpotlightCard";
 import { useState } from "react";
-import Nfc from "../icons/NFC";
 import ScanText from "../icons/ScanText";
 import HeartHandshake from "../icons/HeartHandshake";
 import Slack from "../icons/Slack";
@@ -36,7 +35,7 @@ const Landing = () => {
   return (
     <div className="relative min-h-screen bg-zinc-950 overflow-hidden">
       {/* Hero Section */}
-      <section className="w-full min-h-[40vh] flex flex-col justify-center items-center pt-32 pb-12">
+      <section className="relative w-full min-h-[40vh] flex flex-col justify-center items-center pt-32 pb-12 z-[99]">
         <ShinyText
           text="Welcome to Docs"
           speed={2}
@@ -51,7 +50,7 @@ const Landing = () => {
       </section>
 
       {/* Threads Animation */}
-      <section className="absolute inset-0 top-10 mb-24">
+      <section className="absolute inset-0 top-10 mb-24 z-[10]">
         <Threads amplitude={1} distance={0.1} enableMouseInteraction={true} />
       </section>
 

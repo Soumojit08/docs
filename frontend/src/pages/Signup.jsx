@@ -70,25 +70,25 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
+    <div className="min-h-screen grid lg:grid-cols-2 bg-zinc-950">
       {/* left side */}
-      <div className="flex flex-col justify-center items-center p-6 mt-6 sm:p-12">
-        <div className="w-full max-w-md space-y-6">
+      <div className="flex flex-col justify-center items-center px-6 sm:p-12">
+        <div className="w-full max-w-md space-y-4">
           {/* LOGO */}
-          <div className="text-center mb-4">
-            <div className="flex flex-col items-center gap-2 group">
+          <div className="text-center">
+            <div className="flex flex-col items-center gap-1 group">
               <div
                 className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
               group-hover:bg-primary/20 transition-colors"
               >
                 <FileArchiveIcon className="size-6 text-primary" />
               </div>
-              <h1 className="text-2xl font-bold mt-2">Create Account</h1>
+              <h1 className="text-2xl font-bold">Create Account</h1>
             </div>
           </div>
 
           <form
-            className="space-y-4"
+            className="space-y-2"
             onSubmit={handleSignup}
             encType="multipart/form-data"
           >
