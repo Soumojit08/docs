@@ -3,6 +3,10 @@ import ShinyText from "../components/ShinyText";
 import GetStarted from "../components/Buttons/GetStarted";
 import SpotlightCard from "../components/SpotlightCard";
 import { useState } from "react";
+import Nfc from "../icons/NFC";
+import ScanText from "../icons/ScanText";
+import HeartHandshake from "../icons/HeartHandshake";
+import Slack from "../icons/Slack";
 
 const Landing = () => {
   const [card] = useState([
@@ -11,21 +15,21 @@ const Landing = () => {
       description:
         "Get exclusive benefits, features & 24/7 support as a permanent club member.",
       buttonText: "Join Now",
-      icon: "sparkles",
+      icon: <Slack />,
     },
     {
       title: "Premium Features",
       description:
         "Access a suite of advanced tools and functionalities to enhance your workflow.",
       buttonText: "Learn More",
-      icon: "key",
+      icon: <ScanText />,
     },
     {
       title: "Support Our Mission",
       description:
         "Your contribution helps us continue to develop and improve.",
       buttonText: "Donate",
-      icon: "heart",
+      icon: <HeartHandshake />,
     },
   ]);
 
@@ -59,9 +63,11 @@ const Landing = () => {
             className="w-80 mx-4 my-4 p-6 bg-neutral-800 rounded-lg shadow-lg"
             spotlightColor="rgba(255, 255, 255, 0.25)"
           >
-            <div className="flex flex-col text-left">
-              <span></span>
-              <h2 className="text-2xl font-bold mb-2 text-left">{item.title}</h2>
+            <div className="flex flex-col text-left items-start">
+              <span className="items-start mb-4">{item.icon}</span>
+              <h2 className="text-2xl font-bold mb-2 text-left">
+                {item.title}
+              </h2>
               <p className="text-sm text-gray-400">{item.description}</p>
               <button className="mt-4 btn bg-white text-zinc-900 shadow-none rounded-lg w-2/4">
                 {item.buttonText}
