@@ -88,7 +88,7 @@ const SignUpPage = () => {
           </div>
 
           <form
-            className="space-y-2"
+            className="space-y-4"
             onSubmit={handleSignup}
             encType="multipart/form-data"
           >

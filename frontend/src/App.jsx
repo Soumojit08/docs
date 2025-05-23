@@ -11,13 +11,17 @@ const App = () => {
   const fetchMe = useAuthStore((state) => state.getMe);
   const { isAuthenticated } = useAuthStore();
 
+  const noNavbarRoutes = ["/login", "/signup"];
+  const showNavbar = !noNavbarRoutes.includes(window.location.pathname);
+
   useEffect(() => {
     fetchMe();
   }, [fetchMe]);
 
   return (
     <div className="bg-zinc-900">
-      <Nav />
+      {showNavbar && <Nav />}
+
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={isAuthenticated ? <Home /> : <Login />} />
