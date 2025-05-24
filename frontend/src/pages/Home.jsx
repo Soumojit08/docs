@@ -1,4 +1,3 @@
-import React from 'react'
 import Nav from '../components/Nav';
 
 const Home = () => {
@@ -12,4 +11,4 @@ const Home = () => {
   );
 }
 
-export default Home
+export default Home;

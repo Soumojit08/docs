@@ -28,7 +28,7 @@ const Nav = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -60,17 +60,17 @@ const Nav = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-zinc-900 rounded-box z-1 mt-1 w-24 p-2 shadow"
             >
               <button>
-                <Link className="justify-between">
+                <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
                 </Link>
               </button>
-              <li>
-                <Link>Settings</Link>
-              </li>
+              <button>
+                <Link to="/settings">Settings</Link>
+              </button>
+
               <button onClick={handleLogout}>
                 <Link>Logout</Link>
               </button>
