@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { LogOut, FileArchive } from "lucide-react";
 import useAuthStore from "../store/useAuthStore";
 import { useEffect, useState } from "react";
 import FileChartPie from "../icons/FileChartPie";
