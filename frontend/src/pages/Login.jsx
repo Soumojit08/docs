@@ -1,9 +1,11 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { Eye, FileArchiveIcon, EyeClosed } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 import AuthImagePattern from "../components/AuthImagePattern";
 import useAuthStore from "../store/useAuthStore";
+
+import FileChartPie from "../icons/FileChartPie";
 
 const Login = () => {
   const { login } = useAuthStore();
@@ -46,8 +48,8 @@ const Login = () => {
       {/* left side */}
 
       <AuthImagePattern
-        title="Join our community"
-        subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
+        title="Stay Connected"
+        subtitle="No need to worry about your data. We are committed to keeping your data safe and secure."
       />
 
       {/* right side */}
@@ -57,10 +59,10 @@ const Login = () => {
           <div className="text-center mb-4">
             <div className="flex flex-col items-center gap-2 group">
               <div
-                className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
-              group-hover:bg-primary/20 transition-colors"
+                className="size-12 rounded-xl bg-zinc-900 flex items-center justify-center 
+              transition-colors"
               >
-                <FileArchiveIcon className="size-6 text-primary" />
+                <FileChartPie className="size-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Welcome Back !</h1>
             </div>
@@ -110,7 +112,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="btn btn-primary w-full"
+              className="btn bg-white text-zinc-900 w-full"
               onClick={handleLogin}
             >
               Login
@@ -120,7 +122,7 @@ const Login = () => {
           <div className="text-center">
             <p className="text-base-content/60">
               Don't have an account?{" "}
-              <Link to="/signup" className="link link-primary">
+              <Link to="/signup" className="link text-white link-hover">
                 Sign up
               </Link>
             </p>

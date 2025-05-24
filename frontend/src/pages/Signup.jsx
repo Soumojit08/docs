@@ -6,8 +6,10 @@ import { useState } from "react";
 
 import useAuthStore from "../store/useAuthStore";
 
+import FileChartPie from "../icons/FileChartPie";
+
 const SignUpPage = () => {
-  const { signup, loading, error } = useAuthStore();
+  const { signup } = useAuthStore();
   const [formData, setFormData] = useState({
     fullName: "",
     userName: "",
@@ -78,10 +80,10 @@ const SignUpPage = () => {
           <div className="text-center">
             <div className="flex flex-col items-center gap-1 group">
               <div
-                className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
-              group-hover:bg-primary/20 transition-colors"
+                className="size-12 rounded-xl bg-zinc-900 flex items-center justify-center 
+              transition-colors"
               >
-                <FileArchiveIcon className="size-6 text-primary" />
+                <FileChartPie className="size-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold">Create Account</h1>
             </div>
@@ -184,7 +186,9 @@ const SignUpPage = () => {
 
             <button
               type="submit"
-              className={`btn btn-primary w-full ${isLoading ? "loading" : ""}`}
+              className={`btn bg-white text-zinc-900 w-full ${
+                isLoading ? "loading" : ""
+              }`}
               disabled={isLoading}
             >
               {isLoading ? "Signing Up..." : "Sign Up"}
@@ -194,7 +198,7 @@ const SignUpPage = () => {
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
-              <Link to="/login" className="link link-primary">
+              <Link to="/login" className="link text-white link-hover">
                 Sign in
               </Link>
             </p>
@@ -205,7 +209,7 @@ const SignUpPage = () => {
       {/* right side */}
       <AuthImagePattern
         title="Join our community"
-        subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
+        subtitle="No need to worry about your data. We are committed to keeping your data safe and secure."
       />
     </div>
   );

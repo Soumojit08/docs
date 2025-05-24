@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
 import { useEffect } from "react";
@@ -11,17 +10,13 @@ const App = () => {
   const fetchMe = useAuthStore((state) => state.getMe);
   const { isAuthenticated } = useAuthStore();
 
-  const noNavbarRoutes = ["/login", "/signup"];
-  const showNavbar = !noNavbarRoutes.includes(window.location.pathname);
-
   useEffect(() => {
     fetchMe();
   }, [fetchMe]);
 
   return (
     <div className="bg-zinc-900">
-      {showNavbar && <Nav />}
-
+      
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={isAuthenticated ? <Home /> : <Login />} />

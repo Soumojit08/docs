@@ -6,6 +6,7 @@ import { useState } from "react";
 import ScanText from "../icons/ScanText";
 import HeartHandshake from "../icons/HeartHandshake";
 import Slack from "../icons/Slack";
+import Nav from "../components/Nav";
 
 const Landing = () => {
   const [card] = useState([
@@ -33,49 +34,52 @@ const Landing = () => {
   ]);
 
   return (
-    <div className="relative min-h-screen bg-zinc-950 overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative w-full min-h-[40vh] flex flex-col justify-center items-center pt-32 pb-12 z-[99]">
-        <ShinyText
-          text="Welcome to Docs"
-          speed={2}
-          className="text-7xl font-bold mb-4 text-center tracking-tight"
-        />
-        <ShinyText
-          text="Your AI-Powered All In One Documentation Assistant Here."
-          speed={3}
-          className="text-2xl font-light mb-4 text-center tracking-loose"
-        />
-        <GetStarted />
-      </section>
+    <>
+      <Nav />
+      <div className="relative min-h-screen bg-zinc-950 overflow-hidden">
+        {/* Hero Section */}
+        <section className="relative w-full min-h-[40vh] flex flex-col justify-center items-center pt-32 pb-12 z-[99]">
+          <ShinyText
+            text="Welcome to Docs"
+            speed={2}
+            className="text-7xl font-bold mb-4 text-center tracking-tight"
+          />
+          <ShinyText
+            text="Your AI-Powered All In One Documentation Assistant Here."
+            speed={3}
+            className="text-2xl font-light mb-4 text-center tracking-loose"
+          />
+          <GetStarted />
+        </section>
 
-      {/* Threads Animation */}
-      <section className="absolute inset-0 top-10 mb-24 z-[10]">
-        <Threads amplitude={1} distance={0.1} enableMouseInteraction={true} />
-      </section>
+        {/* Threads Animation */}
+        <section className="absolute inset-0 top-10 mb-24 z-[10]">
+          <Threads amplitude={1} distance={0.1} enableMouseInteraction={true} />
+        </section>
 
-      {/* Cards Section */}
-      <section className="relative z-40 flex flex-wrap items-stretch justify-center gap-8 pb-16 mt-96">
-        {card.map((item, index) => (
-          <SpotlightCard
-            key={index}
-            className="w-80 mx-4 my-4 p-6 bg-neutral-800 rounded-lg shadow-lg"
-            spotlightColor="rgba(255, 255, 255, 0.25)"
-          >
-            <div className="flex flex-col text-left items-start">
-              <span className="items-start mb-4">{item.icon}</span>
-              <h2 className="text-2xl font-bold mb-2 text-left">
-                {item.title}
-              </h2>
-              <p className="text-sm text-gray-400">{item.description}</p>
-              <button className="mt-4 btn bg-white text-zinc-900 shadow-none rounded-lg w-2/4">
-                {item.buttonText}
-              </button>
-            </div>
-          </SpotlightCard>
-        ))}
-      </section>
-    </div>
+        {/* Cards Section */}
+        <section className="relative z-40 flex flex-wrap items-stretch justify-center gap-8 pb-16 mt-96">
+          {card.map((item, index) => (
+            <SpotlightCard
+              key={index}
+              className="w-80 mx-4 my-4 p-6 bg-neutral-800 rounded-lg shadow-lg"
+              spotlightColor="rgba(255, 255, 255, 0.25)"
+            >
+              <div className="flex flex-col text-left items-start">
+                <span className="items-start mb-4">{item.icon}</span>
+                <h2 className="text-2xl font-bold mb-2 text-left">
+                  {item.title}
+                </h2>
+                <p className="text-sm text-gray-400">{item.description}</p>
+                <button className="mt-4 btn bg-white text-zinc-900 shadow-none rounded-lg w-2/4">
+                  {item.buttonText}
+                </button>
+              </div>
+            </SpotlightCard>
+          ))}
+        </section>
+      </div>
+    </>
   );
 };
 
