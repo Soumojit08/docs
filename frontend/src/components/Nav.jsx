@@ -10,34 +10,31 @@ const navVariants = {
     left: 0,
     right: 0,
     width: "100%",
+    x: "0%",
     borderRadius: "0px",
-    boxShadow: "0 2px 16px 0 rgba(31,38,135,0.10)", // subtle shadow for attached
-    background: "rgba(9,9,11,1)", // bg-zinc-950
-    paddingLeft: "2.5rem",
-    paddingRight: "2.5rem",
-    paddingTop: "0.5rem",
-    paddingBottom: "0.5rem",
+    boxShadow: "none",
+    background: "rgba(9,9,11,1)",
     backdropFilter: "blur(0px)",
-    x: 0,
-    transform: "none",
-    transition: { type: "spring", stiffness: 120, damping: 20 },
+    transition: {
+      type: "spring",
+      stiffness: 200,
+      damping: 30,
+    },
   },
   floating: {
     top: 24,
     left: "50%",
-    right: "auto",
-    width: 420,
-    x: "-50%",
+    x: "-50%" ,
+    width: "420px",
     borderRadius: "1.5rem",
-    boxShadow: "0 0 32px 4px rgba(180,180,180,0.25)", // gray glow
-    background: "rgba(255,255,255,0.08)",
-    paddingLeft: "2rem",
-    paddingRight: "2rem",
-    paddingTop: "0.5rem",
-    paddingBottom: "0.5rem",
+    boxShadow: "0 0 12px 2px rgba(180,180,180,0.25)",
+    background: "rgba(30,30,30,0.85)",
     backdropFilter: "blur(12px)",
-    transform: "translateX(-50%)",
-    transition: { type: "spring", stiffness: 120, damping: 20 },
+    transition: {
+      type: "spring",
+      stiffness: 200,
+      damping: 30,
+    },
   },
 };
 
@@ -64,69 +61,76 @@ const Nav = () => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed flex items-center justify-between z-[999]"
-        initial={floating ? "attached" : "floating"}
+        className="fixed z-[999]"
+        initial="attached"
         animate={floating ? "floating" : "attached"}
         variants={navVariants}
         style={{
-          left: floating ? "50%" : 0,
-          right: floating ? "auto" : 0,
-          width: floating ? 420 : "100%",
+          width: floating ? "420px" : "100%",
         }}
       >
-        <span className="text-lg font-bold uppercase tracking-tight flex items-center select-none">
-          <FileChartPie className="h-6 w-6" />
-          <span className="ml-2">DOCS</span>
-        </span>
-        <div>
-          {isAuthenticated ? (
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-12 rounded-full">
-                  <img
-                    alt="User Profile"
-                    src={user?.profilePic}
-                    className="h-full w-full object-cover rounded-full"
-                  />
+        <motion.div
+          className="flex items-center justify-between w-full px-10 py-3"
+          layout
+        >
+          <span className="text-lg font-bold uppercase tracking-tight flex items-center select-none">
+            <FileChartPie className="h-6 w-6" />
+            <span className="ml-2">DOCS</span>
+          </span>
+
+          <motion.div layout>
+            {isAuthenticated ? (
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                  style={{ minWidth: 40, minHeight: 40, width: 40, height: 40 }}
+                >
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <img
+                      alt="User Profile"
+                      src={user?.profilePic}
+                      className="h-full w-full object-cover rounded-full"
+                    />
+                  </div>
                 </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-zinc-900 rounded-box z-1 mt-1 w-24 p-2 shadow"
+                >
+                  <li>
+                    <Link to="/profile" className="justify-between">
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/settings">Settings</Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout} className="w-full text-left">
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-zinc-900 rounded-box z-1 mt-1 w-24 p-2 shadow"
+            ) : (
+              <Link
+                to="/login"
+                className="btn bg-white text-black rounded-full shadow-none hover:bg-transparent hover:text-white border-white transition-all duration-100"
+                style={{
+                  height: 40,
+                  minHeight: 40,
+                  padding: "0 20px",
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                }}
               >
-                <li>
-                  <Link to="/profile" className="justify-between">
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/settings">Settings</Link>
-                </li>
-                <li>
-                  <button onClick={handleLogout} className="w-full text-left">
-                    Logout
-                  </button>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <Link
-              to="/login"
-              className="btn bg-white text-black rounded-full shadow-none hover:bg-transparent hover:text-white border-white transition-all duration-100 px-6 py-2"
-              style={{
-                fontWeight: 500,
-                fontSize: "1rem",
-                minWidth: 80,
-              }}
-            >
-              Login
-            </Link>
-          )}
-        </div>
+                Login
+              </Link>
+            )}
+          </motion.div>
+        </motion.div>
       </motion.div>
     </AnimatePresence>
   );
