@@ -16,9 +16,8 @@ const App = () => {
 
   return (
     <div className="bg-zinc-900">
-      
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={!isAuthenticated ? <Landing /> : <Home />} />
         <Route path="/home" element={isAuthenticated ? <Home /> : <Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={isAuthenticated ? <Home /> : <Login />} />
