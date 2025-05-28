@@ -102,7 +102,7 @@ const SignUpPage = () => {
                 <input
                   type="text"
                   name="fullName"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full focus:outline-none bg-zinc-900 shadow-none"
                   placeholder="John Doe"
                   onChange={handleChange}
                   value={formData.fullName}
@@ -118,7 +118,7 @@ const SignUpPage = () => {
                 <input
                   type="email"
                   name="email"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full focus:outline-none bg-zinc-900 shadow-none"
                   placeholder="you@example.com"
                   required
                   onChange={handleChange}
@@ -135,7 +135,7 @@ const SignUpPage = () => {
                 <input
                   type="text"
                   name="userName"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full focus:outline-none bg-zinc-900 shadow-none"
                   placeholder="Johndoe_01"
                   onChange={handleChange}
                   value={formData.userName}
@@ -151,7 +151,7 @@ const SignUpPage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full focus:outline-none bg-zinc-900 shadow-none"
                   placeholder="••••••••"
                   onChange={handleChange}
                   value={formData.password}
@@ -178,7 +178,7 @@ const SignUpPage = () => {
                 <input
                   type="file"
                   name="profilePic"
-                  className="file-input w-full"
+                  className="file-input w-full focus:outline-none bg-zinc-900 shadow-none"
                   onChange={handleChange}
                 />
               </div>

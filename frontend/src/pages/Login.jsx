@@ -76,7 +76,7 @@ const Login = () => {
               <div className="relative">
                 <input
                   type="text"
-                  className={`input input-bordered w-full`}
+                  className={`input input-bordered w-full focus:outline-none bg-zinc-900 shadow-none`}
                   placeholder="Johndoe_01"
                   name="userName"
                   onChange={handleChange}
@@ -91,7 +91,7 @@ const Login = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  className={`input input-bordered w-full`}
+                  className={`input input-bordered w-full focus:outline-none bg-zinc-900 shadow-none`}
                   placeholder="••••••••"
                   name="password"
                   onChange={handleChange}
