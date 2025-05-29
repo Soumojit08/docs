@@ -7,4 +7,6 @@ const router = express.Router();
 
 router.get("/me", authMiddleware, controller.getMe);
 
+router.post("/files", authMiddleware, )
+
 export default router;
