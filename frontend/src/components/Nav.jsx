@@ -70,12 +70,12 @@ const Nav = () => {
         }}
       >
         <motion.div
-          className="flex items-center justify-between w-full px-10 py-3"
+          className="flex items-center justify-between w-full px-10 py-4"
           layout
         >
           <span className="text-lg font-bold uppercase tracking-tight flex items-center select-none">
             <FileChartPie className="h-6 w-6" />
-            <span className="ml-2">DOCS</span>
+            <span className="nav-logo tracking-widest text-xl font-bold">DOCS</span>
           </span>
 
           <motion.div layout>

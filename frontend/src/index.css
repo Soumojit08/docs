@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@font-face{
+  font-family: 'Plutur';
+  src: url("../public/fonts/Plutur.ttf");
+}
+
 @keyframes shine {
   0% {
     background-position: 100%;
@@ -11,4 +16,8 @@
 }
 .animate-shine {
   animation: shine 2s linear infinite;
+}
+
+.nav-logo {
+  font-family: Plutur;
 }
