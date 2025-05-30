@@ -25,7 +25,7 @@ const navVariants = {
     top: 24,
     left: "50%",
     x: "-50%" ,
-    width: "420px",
+    width: "380px",
     borderRadius: "1.5rem",
     boxShadow: "0 0 12px 2px rgba(180,180,180,0.25)",
     background: "rgba(30,30,30,0.85)",
@@ -66,7 +66,7 @@ const Nav = () => {
         animate={floating ? "floating" : "attached"}
         variants={navVariants}
         style={{
-          width: floating ? "420px" : "100%",
+          width: floating ? "380px" : "100%",
         }}
       >
         <motion.div
