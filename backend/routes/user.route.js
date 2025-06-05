@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.get("/me", authMiddleware, controller.getMe);
 
-router.post("/files", authMiddleware, )
+router.post("/upload-files", authMiddleware, controller.uploadFile);
 
 export default router;

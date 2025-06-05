@@ -15,10 +15,8 @@ const userFileSchema = new mongoose.Schema({
     default: null,
   },
   fileType: {
-    type: {
-      String,
-      enum: ["png", "jpg", "jpeg", "pdf", "docx", "txt", "xlsx", "pptx"],
-    },
+    type: String,
+    enum: ["png", "jpg", "jpeg", "pdf", "docx", "txt", "xlsx", "pptx"],
     required: true,
   },
   fileSize: {
