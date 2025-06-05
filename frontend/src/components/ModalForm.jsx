@@ -1,17 +1,65 @@
 import React, { useState } from "react";
+import axiosInstance from "../lib/axios";
+import { useCookies } from "react-cookie";
 
-const ModalForm = () => {
+const ModalForm = ({ onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    fileName: "",
+    file: null,
+    fileDescription: "",
+    fileType: "Auto Detect",
+  });
+  const [cookies] = useCookies(["token", "user"]);
+  const userId = cookies.user?._id;
+  const token = cookies.token;
 
-  const handleChange = (e) => {};
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "file") {
+      setFormData((prev) => ({ ...prev, file: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.file) return;
+    setIsLoading(true);
+    try {
+      const data = new FormData();
+      data.append("fileName", formData.fileName);
+      data.append("fileDescription", formData.fileDescription);
+      data.append(
+        "fileType",
+        formData.fileType === "Auto Detect" ? "" : formData.fileType
+      );
+      data.append("file", formData.file);
+
+      // Send token as Authorization header
+      await axiosInstance.post("/user/upload-files", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+      });
+
+      // Optionally close modal or show success
+      if (onClose) onClose();
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="bg-zinc-900/30 backdrop-blur-lg shadow-sm shadow-zinc-800/30 top-1/2 left-1/2 transform -translate-1/2  rounded-2xl absolute md:h-[75%] md:w-[35%] p-8 h-[50%] w-[90%]">
+    <div className="bg-zinc-900/30 backdrop-blur-lg shadow-sm shadow-zinc-800/30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl absolute md:h-[75%] md:w-[35%] p-8 h-[50%] w-[90%] z-50">
       <h1 className="text-white text-2xl font-bold">Upload New File</h1>
-
-      <form className="space-y-2 mt-2">
+      <form onSubmit={handleSubmit} className="space-y-2 mt-2">
         <div className="form-control">
-          <label className="lable">
+          <label className="label">
             <span className="label-text font-medium">File Name</span>
           </label>
           <div className="relative mt-1">
@@ -21,6 +69,7 @@ const ModalForm = () => {
               autoComplete="off"
               placeholder="Enter File Name"
               name="fileName"
+              value={formData.fileName}
               onChange={handleChange}
               required
             />
@@ -28,29 +77,32 @@ const ModalForm = () => {
         </div>
 
         <div className="form-control">
-          <label className="lable">
+          <label className="label">
             <span className="label-text font-medium">File Description</span>
           </label>
           <div className="relative mt-1">
-            <fieldset className="fieldset">
-              <textarea
-                className="textarea h-24 w-full bg-zinc-900 focus:outline-none shadow-none"
-                placeholder="Your File Description Here"
-              ></textarea>
-              <div className="label">Optional</div>
-            </fieldset>
+            <textarea
+              className="textarea h-24 w-full bg-zinc-900 focus:outline-none shadow-none"
+              placeholder="Your File Description Here"
+              name="fileDescription"
+              value={formData.fileDescription}
+              onChange={handleChange}
+            />
+            <div className="label">Optional</div>
           </div>
         </div>
 
         <div className="form-control">
-          <label className="lable">
+          <label className="label">
             <span className="label-text font-medium">
               Choose Your File Type
             </span>
           </label>
           <div className="relative mt-1">
             <select
-              defaultValue="Pick a color"
+              name="fileType"
+              value={formData.fileType}
+              onChange={handleChange}
               className="select bg-zinc-900 w-full focus:outline-none shadow-none"
             >
               <option>Auto Detect</option>
@@ -74,7 +126,7 @@ const ModalForm = () => {
 
         <div className="form-control mb-4">
           <label className="label">
-            <span className="label-text font-medium">Profile Pic</span>
+            <span className="label-text font-medium">File</span>
           </label>
           <div className="relative">
             <input
@@ -82,6 +134,7 @@ const ModalForm = () => {
               name="file"
               className="file-input w-full focus:outline-none bg-zinc-900 shadow-none"
               onChange={handleChange}
+              required
             />
           </div>
         </div>
@@ -98,7 +151,6 @@ const ModalForm = () => {
           <span className={`${isLoading ? "invisible" : "visible"}`}>
             {isLoading ? "Uploading..." : "Upload File"}
           </span>
-
           {isLoading && (
             <span className="absolute inset-0 flex items-center justify-center">
               <svg
@@ -125,6 +177,15 @@ const ModalForm = () => {
           )}
         </button>
       </form>
+      {onClose && (
+        <button
+          className="absolute top-4 right-4 text-white text-xl"
+          onClick={onClose}
+          type="button"
+        >
+          ×
+        </button>
+      )}
     </div>
   );
 };
