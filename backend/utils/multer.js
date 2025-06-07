@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 // Initialize multer
 const upload = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB limit
+  limits: { fileSize: 100 * 1024 * 1024 }, // 100 MB limit
 });
 
 export default upload;
