@@ -7,6 +7,7 @@ const useAuthStore = create((set) => ({
   isAuthenticated: false,
   loading: false,
   error: null,
+  files: [],
 
   signup: async (formData) => {
     set({ loading: true });
@@ -77,6 +78,20 @@ const useAuthStore = create((set) => ({
         loading: false,
         isAuthenticated: false,
       });
+    }
+  },
+
+  getFile: async (token) => {
+    set({ loading: true });
+    try {
+      const response = await axiosInstance.get("/user/files", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      set({ files: response.data.data, loading: false });
+    } catch (error) {
+      set({ error: error.message, loading: false });
     }
   },
 }));
