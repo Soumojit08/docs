@@ -11,4 +11,6 @@ router.get("/me", authMiddleware, controller.getMe);
 
 router.post("/upload-files", authMiddleware, upload.single("file"), controller.uploadFile);
 
+router.get("/files", authMiddleware, controller.getFiles);
+
 export default router;
