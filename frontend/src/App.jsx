@@ -15,7 +15,7 @@ const App = () => {
   }, [fetchMe]);
 
   return (
-    <div className="bg-zinc-900">
+    <div className=" bg-[#09090b] min-h-screen">
       <Routes>
         <Route path="/" element={!isAuthenticated ? <Landing /> : <Home />} />
         <Route path="/home" element={isAuthenticated ? <Home /> : <Login />} />

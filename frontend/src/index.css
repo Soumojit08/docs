@@ -17,7 +17,12 @@
 .animate-shine {
   animation: shine 2s linear infinite;
 }
-
+html{
+  background-color: #09090b;  
+  height: 100%;
+  min-height: 100%;
+}
 .nav-logo {
   font-family: Plutur;
 }
+
