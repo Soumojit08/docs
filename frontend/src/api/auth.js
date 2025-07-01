@@ -13,3 +13,11 @@ export const loginApi = async (credentials) => {
 export const logoutApi = async () => {
   return axiosInstance.post("/auth/logout");
 };
+
+export const getUserImages = async (token) => {
+  return axiosInstance.get("/user/images", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

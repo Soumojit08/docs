@@ -5,49 +5,62 @@ import { useCookies } from "react-cookie";
 import Nav from "../components/Nav";
 import ModalForm from "../components/ModalForm";
 import { PlusIcon, XIcon } from "lucide-react";
+import { useState } from "react";
+import { getUserImages } from "../api/auth.js";
 
 const Home = () => {
   const [cookies] = useCookies(["token"]);
   const getFile = useAuthStore((state) => state.getFile);
-  const files = useAuthStore((state) => state.files);
+  // const files = useAuthStore((state) => state.files);
+  const [items, setItems] = useState([]);
   const [showModal, setShowModal] = React.useState(false);
 
   useEffect(() => {
     if (cookies.token) getFile(cookies.token);
   }, [cookies.token, getFile]);
 
-  const items = [
-    {
-      id: "1",
-      img: "https://picsum.photos/id/1015/600/900?grayscale",
-      url: "https://example.com/one",
-      height: 400,
-    },
-    {
-      id: "2",
-      img: "https://picsum.photos/id/1011/600/750?grayscale",
-      url: "https://example.com/two",
-      height: 250,
-    },
-    {
-      id: "3",
-      img: "https://picsum.photos/id/1020/600/800?grayscale",
-      url: "https://example.com/three",
-      height: 600,
-    },
-    {
-      id: "4",
-      img: "https://picsum.photos/id/1015/600/900?grayscale",
-      url: "https://example.com/one",
-      height: 400,
-    },
-    {
-      id: "5",
-      img: "https://picsum.photos/id/1011/600/750?grayscale",
-      url: "https://example.com/two",
-      height: 250,
-    },
-  ];
+  useEffect(() => {
+    const fetchImages = async () => {
+      if (cookies.token) {
+        const res = await getUserImages(cookies.token);
+        setItems(res.data.items);
+      }
+    };
+    fetchImages();
+  }, [cookies.token]);
+
+  // const items = [
+  //   {
+  //     id: "1",
+  //     img: "https://picsum.photos/id/1015/600/900?grayscale",
+  //     url: "https://example.com/one",
+  //     height: 400,
+  //   },
+  //   {
+  //     id: "2",
+  //     img: "https://picsum.photos/id/1011/600/750?grayscale",
+  //     url: "https://example.com/two",
+  //     height: 250,
+  //   },
+  //   {
+  //     id: "3",
+  //     img: "https://picsum.photos/id/1020/600/800?grayscale",
+  //     url: "https://example.com/three",
+  //     height: 600,
+  //   },
+  //   {
+  //     id: "4",
+  //     img: "https://picsum.photos/id/1015/600/900?grayscale",
+  //     url: "https://example.com/one",
+  //     height: 400,
+  //   },
+  //   {
+  //     id: "5",
+  //     img: "https://picsum.photos/id/1011/600/750?grayscale",
+  //     url: "https://example.com/two",
+  //     height: 250,
+  //   },
+  // ];
 
   return (
     <div className="min-h-screen relative">

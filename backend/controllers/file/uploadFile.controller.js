@@ -42,13 +42,13 @@ const uploadFileController = async (req, res) => {
     }
 
     // Save file metadata to DB
-    const fileDoc = await Models.FileModel.create({
+    const fileDoc = await Models.ImageModel.create({
       user: user._id,
       fileName: fileName || req.file.originalname,
       fileDescription: fileDescription || "",
       fileType: fileType || req.file.mimetype.split("/")[1],
       fileSize: fileSize || req.file.size,
-      fileUrl,
+      fileUrl: fileUrl,
     });
 
     return res.status(StatusCodes.CREATED).json({

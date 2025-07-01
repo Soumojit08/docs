@@ -4,6 +4,7 @@ import logoutController from "./auth/logout.controller.js";
 import getMeController from "./get/getMe.controller.js";
 import uploadFileController from "./file/uploadFile.controller.js";
 import getFilesController from "./get/getFiles.controller.js";
+import getImagesController from "./get/getImages.controller.js";
 
 const controller = {
   signup: signupController,
@@ -12,6 +13,7 @@ const controller = {
   getMe: getMeController,
   uploadFile: uploadFileController,
   getFiles: getFilesController,
+  getImages: getImagesController,
 };
 
 export default controller;
