@@ -55,7 +55,7 @@ const ModalForm = ({ onClose }) => {
   };
 
   return (
-    <div className="bg-zinc-900/30 backdrop-blur-lg shadow-sm shadow-zinc-800/30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl absolute md:h-[75%] md:w-[35%] p-8 h-[50%] w-[90%] z-50">
+    <div className="bg-zinc-900/30 backdrop-blur-lg shadow-sm shadow-zinc-800/30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl absolute md:h-[65%] md:w-[35%] p-8 h-[50%] w-[90%] z-50">
       <h1 className="text-white text-2xl font-bold">Upload New File</h1>
       <form onSubmit={handleSubmit} className="space-y-2 mt-2">
         <div className="form-control">
